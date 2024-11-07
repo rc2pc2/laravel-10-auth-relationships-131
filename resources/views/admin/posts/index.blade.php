@@ -19,6 +19,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Title</th>
+                            <th scope="col">Category</th>
                             <th scope="col">User</th>
                             <th scope="col">Mail</th>
                         </tr>
@@ -26,6 +27,7 @@
                     <tbody>
                         @forelse ( $posts as $index => $post )
                         <tr>
+                            {{-- @dump($post->category()) --}}
                             <td>
                                 {{ $post->id }}
                             </td>
@@ -33,10 +35,17 @@
                                 {{ $post->title }}
                             </td>
                             <td>
-                                {{ $post->user->name }}
+                                {{ $post->category->name }}
                             </td>
                             <td>
-                                {{ $post->user->email }}
+                                <a href="{{ route("admin.users.show", $post->user) }}">
+                                    {{ $post->user->name }}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ route("admin.users.show", $post->user) }}">
+                                    {{ $post->user->email }}
+                                </a>
                             </td>
                             {{-- <td>
                                 <a href="{{ route("admin.posts.show", $post) }}" class="btn btn-sm btn-primary me-1">Show</a>
